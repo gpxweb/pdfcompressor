@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Compressor</title>
+    <!-- Replit Bootstrap Theme -->
+    <link rel="stylesheet" href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-file-pdf me-2"></i>
+                PDF Compressor
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-4">
+        <div class="row justify-content-center">
+            <div class="col-md-10 col-lg-8">
+                <div class="card bg-dark shadow-sm mb-4">
+                    <div class="card-body p-4">
+                        <h1 class="text-center mb-4">PDF Compressor</h1>
+                        <p class="text-center text-muted mb-4">Compress PDF files from ~80MB to ~4MB while maintaining document quality</p>
+                        
+                        <!-- Error Alert -->
+                        <div id="error-container" class="alert alert-danger d-none" role="alert">
+                            <i class="fas fa-exclamation-circle me-2"></i>
+                            <span id="error-text">Error message</span>
+                        </div>
+                        
+                        <!-- Upload Container -->
+                        <div id="upload-container">
+                            <div id="drop-area" class="mb-4">
+                                <i class="fas fa-file-upload upload-icon"></i>
+                                <h4>Drag & Drop your PDF here</h4>
+                                <p class="text-muted">or</p>
+                                <form id="upload-form">
+                                    <label for="file-input" class="file-input-label">
+                                        <i class="fas fa-folder-open me-2"></i>Choose File
+                                    </label>
+                                    <input type="file" id="file-input" accept=".pdf" />
+                                </form>
+                                <p class="mt-3 text-muted small">Maximum file size: 100MB</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Progress Container -->
+                        <div id="progress-container" class="d-none">
+                            <h4 class="mb-3">Processing: <span id="file-name">document.pdf</span></h4>
+                            <div class="progress mb-3" style="height: 20px;">
+                                <div id="progress-bar" class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <p id="status-text" class="text-center mb-3">Uploading...</p>
+                            <button id="compress-btn" class="btn btn-primary d-none action-button mx-auto d-block">
+                                <i class="fas fa-compress-alt me-2"></i>Compress
+                            </button>
+                        </div>
+                        
+                        <!-- Results Container -->
+                        <div id="results-container" class="d-none">
+                            <h4 class="mb-4 text-center">Compression Results</h4>
+                            
+                            <div class="row mb-4">
+                                <div class="col-md-6 mb-3">
+                                    <div class="stats-card text-center">
+                                        <p class="stat-value" id="original-size">0</p>
+                                        <p class="stat-label">Original Size (MB)</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="stats-card text-center">
+                                        <p class="stat-value" id="compressed-size">0</p>
+                                        <p class="stat-label">Compressed Size (MB)</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-4">
+                                <div class="col-md-6 mb-3">
+                                    <div class="stats-card text-center">
+                                        <p class="stat-value" id="reduction-percent">0</p>
+                                        <p class="stat-label">Size Reduction (%)</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="stats-card text-center">
+                                        <p class="stat-value" id="compression-ratio">0</p>
+                                        <p class="stat-label">Compression Ratio</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex justify-content-center gap-3">
+                                <button id="download-btn" class="btn btn-success action-button">
+                                    <i class="fas fa-download me-2"></i>Download
+                                </button>
+                                <button id="new-file-btn" class="btn btn-secondary action-button">
+                                    <i class="fas fa-plus me-2"></i>New File
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card bg-dark shadow-sm">
+                    <div class="card-body p-4">
+                        <h4 class="mb-3">About PDF Compression</h4>
+                        <p>This tool uses advanced compression algorithms to reduce the size of PDF files while maintaining document quality. It's perfect for:</p>
+                        <ul>
+                            <li>Sending PDFs via email</li>
+                            <li>Uploading to websites with file size limits</li>
+                            <li>Saving storage space</li>
+                            <li>Improving document loading times</li>
+                        </ul>
+                        <p>Our compression technology preserves text quality and readability while optimizing images and removing unnecessary metadata.</p>
+                        <p class="mt-3 text-muted small">Note: All processing happens in your browser - your files are never uploaded to any server.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-light py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>PDF Compressor</h5>
+                    <p class="text-muted">Compress PDF files while maintaining quality</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">&copy; 2025 PDF Compressor</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- PDF.js Library for PDF processing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.7.107/pdf.min.js"></script>
+    <!-- PDF-LIB.js for PDF modification -->
+    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="js/script.js"></script>
+</body>
+</html>

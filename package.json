@@ -1,0 +1,21 @@
+{
+  "name": "pdf-compressor",
+  "version": "1.0.0",
+  "description": "A web application that compresses PDF files while maintaining quality",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "pdf",
+    "compression",
+    "web",
+    "application"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "^5.3.0",
+    "pdf-lib": "^1.17.1"
+  }
+}
