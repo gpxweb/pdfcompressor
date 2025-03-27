@@ -1,0 +1,85 @@
+/* Custom styles to complement Bootstrap */
+#drop-area {
+    border: 2px dashed var(--bs-secondary);
+    border-radius: 8px;
+    padding: 40px;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+}
+
+#drop-area.highlight {
+    border-color: var(--bs-primary);
+    background-color: rgba(var(--bs-primary-rgb), 0.1);
+}
+
+.upload-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--bs-secondary);
+}
+
+.file-input-label {
+    cursor: pointer;
+    background-color: var(--bs-primary);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.file-input-label:hover {
+    background-color: var(--bs-primary-dark);
+}
+
+#file-input {
+    display: none;
+}
+
+.stats-card {
+    background-color: var(--bs-dark);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--bs-secondary);
+}
+
+.transition-fade {
+    transition: all 0.3s ease-in-out;
+}
+
+.action-button {
+    min-width: 140px;
+}
+
+/* Progress bar animation */
+@keyframes progress-bar-stripes {
+    from { background-position: 1rem 0; }
+    to { background-position: 0 0; }
+}
+
+.progress-bar-animated {
+    animation: progress-bar-stripes 1s linear infinite;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #drop-area {
+        padding: 20px;
+    }
+    
+    .stat-value {
+        font-size: 1.5rem;
+    }
+}
